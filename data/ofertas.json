@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "titulo": "Pack Arcade Retro",
+        "categoria": "Accesorios",
+        "oferta": true,
+        "descripcion": "Incluye controles clasicos y accesorios para revivir partidas de estilo arcade.",
+        "precio": "$39.990",
+        "imagen": "assets/img/logos_tienda/nino_arcade.jpg"
+    },
+    {
+        "id": 2,
+        "titulo": "Nintendo Switch Essentials",
+        "categoria": "Nintendo",
+        "oferta": false,
+        "descripcion": "Seleccion de juegos y accesorios recomendados para comenzar una nueva biblioteca.",
+        "precio": "$54.990",
+        "imagen": "assets/img/logos_tienda/img_nintendo_essentials.jpg"
+    },
+    {
+        "id": 3,
+        "titulo": "Combo Familia Gaming",
+        "categoria": "Familiar",
+        "oferta": true,
+        "descripcion": "Productos pensados para jugar videojuegos con tu familia.",
+        "precio": "$69.990",
+        "imagen": "assets/img/logos_tienda/Familia_Gaming.jpg"
+    },
+    {
+        "id": 4,
+        "titulo": "Combo Gamer Cumpleaños",
+        "categoria": "Ofertas",
+        "oferta": true,
+        "descripcion": "Productos pensados para jugar videojuegos en tu cumpleaños.",
+        "precio": "$8.990",
+        "imagen": "assets/img/logos_tienda/combo_cumpleanos.jpg"
+    },
+    {
+        "id": 5,
+        "titulo": "Proximos Lanzamientos",
+        "categoria": "Reservas",
+        "oferta": false,
+        "descripcion": "Revisa tus proximos lanzamientos.",
+        "precio": "$55.990",
+        "imagen": "assets/img/logos_tienda/proximos_lanazmientos.jpg"
+    },
+    {
+        "id": 6,
+        "titulo": "Revisa el mundo PC",
+        "categoria": "PC Gaming",
+        "oferta": false,
+        "descripcion": "Mira los nuevos componentes que tenemos pensados para tu Computador.",
+        "precio": "$555.990",
+        "imagen": "assets/img/logos_tienda/arma_tu_pc.jpg"
+    }
+]
