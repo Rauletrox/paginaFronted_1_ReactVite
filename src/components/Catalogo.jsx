@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductoCard from './ProductoCard';
 
-function Catalogo({ busqueda, estado, productos, onBuscar, onCambiarBusqueda, onRecargar, onAgregarCarrito }) {
+function Catalogo({ busqueda, carrito, estado, productos, onBuscar, onCambiarBusqueda, onRecargar, onAgregarCarrito }) {
   return (
     <section id="productos" className="container my-5" aria-labelledby="titulo-productos">
       <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-4">
@@ -27,7 +27,12 @@ function Catalogo({ busqueda, estado, productos, onBuscar, onCambiarBusqueda, on
           </div>
         ) : (
           productos.map((producto) => (
-            <ProductoCard key={producto.id} producto={producto} onAgregarCarrito={onAgregarCarrito} />
+            <ProductoCard
+              key={producto.id}
+              producto={producto}
+              estaEnCarrito={carrito.some((item) => item.id === producto.id)}
+              onAgregarCarrito={onAgregarCarrito}
+            />
           ))
         )}
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatearPrecio, obtenerPrecioNumerico } from '../utils/price';
+import { formatearPrecio, obtenerPrecioProducto } from '../utils/price';
 import { publicPath } from '../utils/paths';
 
 function Carrito({ productos, totalProductos, totalPrecio, onEliminarProducto }) {
@@ -27,11 +27,11 @@ function Carrito({ productos, totalProductos, totalPrecio, onEliminarProducto })
                     <div>
                       <strong>{producto.titulo}</strong>
                       <div className="text-secondary small">
-                        {producto.precio} x {producto.cantidad}
+                        {formatearPrecio(obtenerPrecioProducto(producto))} x {producto.cantidad}
                       </div>
                     </div>
                     <div className="d-flex align-items-center gap-3">
-                      <span className="fw-bold">{formatearPrecio(obtenerPrecioNumerico(producto.precio) * producto.cantidad)}</span>
+                      <span className="fw-bold">{formatearPrecio(obtenerPrecioProducto(producto) * producto.cantidad)}</span>
                       <button className="btn btn-outline-danger btn-sm" type="button" onClick={() => onEliminarProducto(producto.id)}>
                         Eliminar
                       </button>

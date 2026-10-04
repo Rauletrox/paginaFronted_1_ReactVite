@@ -9,7 +9,8 @@ import Carrito from './components/Carrito';
 import Categorias from './components/Categorias';
 import Destacados from './components/Destacados';
 import Footer from './components/Footer';
-import { calcularTotalCarrito } from './utils/price';
+import { calcularCantidadCarrito, calcularTotalCarrito } from './utils/price';
+import { filtrarProductos } from './utils/products';
 import { publicPath } from './utils/paths';
 
 function obtenerCarritoGuardado() {
@@ -48,20 +49,10 @@ function App() {
   }, [carrito]);
 
   const productosFiltrados = useMemo(() => {
-    const termino = busqueda.trim().toLowerCase();
-
-    if (!termino) {
-      return productos;
-    }
-
-    return productos.filter((producto) => (
-      producto.titulo.toLowerCase().includes(termino)
-      || producto.categoria.toLowerCase().includes(termino)
-      || producto.descripcion.toLowerCase().includes(termino)
-    ));
+    return filtrarProductos(productos, busqueda);
   }, [busqueda, productos]);
 
-  const totalCarrito = carrito.reduce((total, producto) => total + producto.cantidad, 0);
+  const totalCarrito = calcularCantidadCarrito(carrito);
   const precioTotalCarrito = calcularTotalCarrito(carrito);
 
   // Actualiza contenido visual del hero mediante estado de React.
@@ -147,6 +138,7 @@ function App() {
         <Presentacion />
         <Catalogo
           busqueda={busqueda}
+          carrito={carrito}
           estado={estadoProductos}
           productos={productosFiltrados}
           onBuscar={buscarProductos}
