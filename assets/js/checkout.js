@@ -25,7 +25,7 @@ function renderizarDetalleCompra() {
     mensajeCarrito.textContent = "Revisa tu pedido antes de confirmar el pago.";
 
     carritoCompra.forEach((producto) => {
-        const subtotal = obtenerPrecioNumerico(producto.precio) * producto.cantidad;
+        const subtotal = obtenerPrecioProducto(producto) * producto.cantidad;
         const item = document.createElement("li");
         item.className = "list-group-item d-flex justify-content-between gap-3";
         item.innerHTML = `
@@ -55,12 +55,20 @@ function configurarPago() {
 
 function calcularTotal() {
     return carritoCompra.reduce((suma, producto) => {
-        return suma + obtenerPrecioNumerico(producto.precio) * producto.cantidad;
+        return suma + obtenerPrecioProducto(producto) * producto.cantidad;
     }, 0);
 }
 
-function obtenerPrecioNumerico(precio) {
-    return Number(precio.replace("$", "").replaceAll(".", ""));
+function obtenerPrecioProducto(producto) {
+    if (producto.oferta && producto.precioOferta) {
+        return producto.precioOferta;
+    }
+
+    if (producto.precioNormal) {
+        return producto.precioNormal;
+    }
+
+    return Number(producto.precio.replace("$", "").replaceAll(".", ""));
 }
 
 function formatearPrecio(valor) {

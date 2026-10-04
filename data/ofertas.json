@@ -5,7 +5,8 @@
         "categoria": "Accesorios",
         "oferta": true,
         "descripcion": "Incluye controles clasicos y accesorios para revivir partidas de estilo arcade.",
-        "precio": "$39.990",
+        "precioNormal": 49990,
+        "precioOferta": 39990,
         "imagen": "assets/img/logos_tienda/nino_arcade.jpg"
     },
     {
@@ -14,7 +15,8 @@
         "categoria": "Nintendo",
         "oferta": false,
         "descripcion": "Seleccion de juegos y accesorios recomendados para comenzar una nueva biblioteca.",
-        "precio": "$54.990",
+        "precioNormal": 54990,
+        "precioOferta": null,
         "imagen": "assets/img/logos_tienda/img_nintendo_essentials.jpg"
     },
     {
@@ -23,7 +25,8 @@
         "categoria": "Familiar",
         "oferta": true,
         "descripcion": "Productos pensados para jugar videojuegos con tu familia.",
-        "precio": "$69.990",
+        "precioNormal": 79990,
+        "precioOferta": 69990,
         "imagen": "assets/img/logos_tienda/Familia_Gaming.jpg"
     },
     {
@@ -32,7 +35,8 @@
         "categoria": "Ofertas",
         "oferta": true,
         "descripcion": "Productos pensados para jugar videojuegos en tu cumpleaños.",
-        "precio": "$8.990",
+        "precioNormal": 12990,
+        "precioOferta": 8990,
         "imagen": "assets/img/logos_tienda/combo_cumpleanos.jpg"
     },
     {
@@ -41,7 +45,8 @@
         "categoria": "Reservas",
         "oferta": false,
         "descripcion": "Revisa tus proximos lanzamientos.",
-        "precio": "$55.990",
+        "precioNormal": 55990,
+        "precioOferta": null,
         "imagen": "assets/img/logos_tienda/proximos_lanazmientos.jpg"
     },
     {
@@ -50,7 +55,8 @@
         "categoria": "PC Gaming",
         "oferta": false,
         "descripcion": "Mira los nuevos componentes que tenemos pensados para tu Computador.",
-        "precio": "$555.990",
+        "precioNormal": 555990,
+        "precioOferta": null,
         "imagen": "assets/img/logos_tienda/arma_tu_pc.jpg"
     }
 ]
