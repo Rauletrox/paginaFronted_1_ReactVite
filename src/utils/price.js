@@ -1,9 +1,21 @@
 export function formatearPrecio(valor) {
-  return `$${valor.toLocaleString('es-CL')}`;
+  return `$${Number(valor || 0).toLocaleString('es-CL')}`;
 }
 
 export function obtenerPrecioProducto(producto) {
-  return producto.oferta && producto.precioOferta ? producto.precioOferta : producto.precioNormal;
+  if (producto.oferta && producto.precioOferta) {
+    return producto.precioOferta;
+  }
+
+  if (producto.precioNormal) {
+    return producto.precioNormal;
+  }
+
+  if (producto.precio) {
+    return Number(producto.precio.replace('$', '').replaceAll('.', ''));
+  }
+
+  return 0;
 }
 
 export function calcularPorcentajeDescuento(producto) {

@@ -19,17 +19,20 @@ function ProductoCard({ producto, estaEnCarrito, onAgregarCarrito }) {
           <h3 className="card-title h5">{producto.titulo}</h3>
           <p className="card-text text-secondary">{producto.descripcion}</p>
           <div className="mb-3">
-            {producto.oferta && (
-              <p className="text-secondary text-decoration-line-through mb-1">
-                Normal: {formatearPrecio(producto.precioNormal)}
+            {producto.oferta ? (
+              <>
+                <p className="mb-1">
+                  Antes <span className="text-secondary text-decoration-line-through">{formatearPrecio(producto.precioNormal)}</span>
+                </p>
+                <p className="fw-bold text-primary fs-5 mb-1">
+                  Ahora con un {porcentajeDescuento}% de descuento queda en {formatearPrecio(precioFinal)}
+                </p>
+                <p className="small text-success mb-0">Ahorras {formatearPrecio(ahorro)}</p>
+              </>
+            ) : (
+              <p className="fw-bold text-primary fs-5 mb-1">
+                Precio: {formatearPrecio(precioFinal)}
               </p>
-            )}
-            <p className="fw-bold text-primary fs-5 mb-1">
-              {producto.oferta ? 'Oferta: ' : 'Precio: '}
-              {formatearPrecio(precioFinal)}
-            </p>
-            {producto.oferta && (
-              <p className="small text-success mb-0">Ahorras {formatearPrecio(ahorro)}</p>
             )}
           </div>
           <button className={`btn mt-auto ${estaEnCarrito ? 'btn-outline-success' : 'btn-success'}`} type="button" onClick={() => onAgregarCarrito(producto)}>
