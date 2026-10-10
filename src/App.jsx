@@ -179,8 +179,10 @@ function App() {
             />
             <Categorias />
             <Destacados
+              carrito={carrito}
               tarjetaActiva={tarjetaActiva}
               onActivarTarjeta={setTarjetaActiva}
+              onAgregarCarrito={agregarAlCarrito}
             />
           </main>
         </>

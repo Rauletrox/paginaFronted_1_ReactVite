@@ -10,27 +10,13 @@ function ProductoCard({ producto, estaEnCarrito, rutaOferta, onAgregarCarrito })
   return (
     <div className="col-md-6">
       <article className="card h-100 shadow-sm">
-        {rutaOferta ? (
-          <a href={`#/ofertas/${rutaOferta}`} aria-label={`Ver ofertas de ${producto.titulo}`}>
-            <img src={publicPath(producto.imagen)} className="card-img-top object-fit-cover catalogo-img" alt={producto.titulo} />
-          </a>
-        ) : (
-          <img src={publicPath(producto.imagen)} className="card-img-top object-fit-cover catalogo-img" alt={producto.titulo} />
-        )}
+        <img src={publicPath(producto.imagen)} className="card-img-top object-fit-cover catalogo-img" alt={producto.titulo} />
         <div className="card-body d-flex flex-column">
           <div className="d-flex flex-wrap gap-2 mb-2">
             <span className="badge text-bg-info">{producto.categoria}</span>
             {!rutaOferta && producto.oferta && <span className="badge text-bg-danger">{porcentajeDescuento}% dcto.</span>}
           </div>
-          <h3 className="card-title h5">
-            {rutaOferta ? (
-              <a href={`#/ofertas/${rutaOferta}`} className="link-dark text-decoration-none">
-                {producto.titulo}
-              </a>
-            ) : (
-              producto.titulo
-            )}
-          </h3>
+          <h3 className="card-title h5">{producto.titulo}</h3>
           <p className="card-text text-secondary">{producto.descripcion}</p>
           {!rutaOferta && (
             <div className="mb-3">
