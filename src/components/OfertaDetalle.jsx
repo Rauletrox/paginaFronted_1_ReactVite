@@ -1,7 +1,8 @@
 import React from 'react';
 import { publicPath } from '../utils/paths';
+import { calcularAhorroProducto, calcularPorcentajeDescuento, formatearPrecio, obtenerPrecioProducto } from '../utils/price';
 
-function OfertaDetalle({ oferta }) {
+function OfertaDetalle({ oferta, carrito, onAgregarCarrito }) {
   if (!oferta) {
     return (
       <main className="container my-5">
@@ -30,9 +31,33 @@ function OfertaDetalle({ oferta }) {
             <div className="col-md-6 col-lg-4" key={item.imagen}>
               <article className="card h-100 shadow-sm">
                 <img src={publicPath(item.imagen)} className="card-img-top object-fit-cover oferta-img" alt={item.titulo} />
-                <div className="card-body">
+                <div className="card-body d-flex flex-column">
+                  <div className="d-flex flex-wrap gap-2 mb-2">
+                    {item.categoria && <span className="badge text-bg-info">{item.categoria}</span>}
+                    {item.oferta && <span className="badge text-bg-danger">{calcularPorcentajeDescuento(item)}% dcto.</span>}
+                  </div>
                   <h2 className="card-title h5">{item.titulo}</h2>
-                  <p className="card-text text-secondary mb-0">{item.descripcion}</p>
+                  <p className="card-text text-secondary">{item.descripcion}</p>
+                  {item.precioNormal && (
+                    <div className="mb-3">
+                      <p className="mb-1">
+                        Antes <span className="text-secondary text-decoration-line-through">{formatearPrecio(item.precioNormal)}</span>
+                      </p>
+                      <p className="fw-bold text-primary fs-5 mb-1">
+                        Ahora con un {calcularPorcentajeDescuento(item)}% de descuento queda en {formatearPrecio(obtenerPrecioProducto(item))}
+                      </p>
+                      <p className="small text-success mb-0">Ahorras {formatearPrecio(calcularAhorroProducto(item))}</p>
+                    </div>
+                  )}
+                  {item.precioNormal && (
+                    <button
+                      className={`btn mt-auto ${carrito.some((producto) => producto.id === item.id) ? 'btn-outline-success' : 'btn-success'}`}
+                      type="button"
+                      onClick={() => onAgregarCarrito(item)}
+                    >
+                      {carrito.some((producto) => producto.id === item.id) ? 'En el carrito' : 'Agregar al carrito'}
+                    </button>
+                  )}
                 </div>
               </article>
             </div>

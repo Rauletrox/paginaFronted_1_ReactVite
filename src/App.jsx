@@ -148,7 +148,11 @@ function App() {
     <div className="bg-light min-vh-100">
       <Navbar totalCarrito={totalCarrito} />
       {estaEnPaginaOferta ? (
-        <OfertaDetalle oferta={ofertaActual} />
+        <OfertaDetalle
+          carrito={carrito}
+          oferta={ofertaActual}
+          onAgregarCarrito={agregarAlCarrito}
+        />
       ) : (
         <>
           <Hero mensaje={mensajeHero} alerta={alertaHero} onCambiarMensaje={cambiarMensajeHero} />

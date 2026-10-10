@@ -30,7 +30,7 @@ npm run dev
 Vite mostrara una URL local parecida a esta:
 
 ```text
-http://localhost:5173/paginaFronted_1_ReactVite/
+http://localhost:5173/
 ```
 
 ## Scripts disponibles
@@ -244,11 +244,13 @@ En `vite.config.js` esta configurada la base del proyecto:
 ```js
 export default defineConfig({
   plugins: [react()],
-  base: '/paginaFronted_1_ReactVite/',
+  base: process.env.NODE_ENV === 'production' ? '/paginaFronted_1_ReactVite/' : '/',
 });
 ```
 
-El valor de `base` debe coincidir con el nombre del repositorio en GitHub. En este caso, el repositorio deberia llamarse:
+Esta configuracion usa `/` en local para poder abrir la app directamente desde `http://localhost:5173/`. Cuando se genera la version de produccion, usa `/paginaFronted_1_ReactVite/` para que funcione en GitHub Pages.
+
+El valor de produccion debe coincidir con el nombre del repositorio en GitHub. En este caso, el repositorio deberia llamarse:
 
 ```text
 paginaFronted_1_ReactVite
@@ -340,7 +342,7 @@ https://Rauletrox.github.io/paginaFronted_1_ReactVite/
 
 ## Recomendaciones importantes
 
-- Si cambias el nombre del repositorio, tambien debes cambiar el valor de `base` en `vite.config.js`.
+- Si cambias el nombre del repositorio, tambien debes cambiar el valor de produccion de `base` en `vite.config.js`.
 - Si cambias el usuario de GitHub, debes actualizar `homepage` en `package.json`.
 - Las imagenes deben estar dentro de `public/assets/img`.
 - Para enlazar imagenes se usa `publicPath()` y rutas como `assets/img/carpeta/imagen.png`.
