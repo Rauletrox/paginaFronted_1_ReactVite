@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductoCard from './ProductoCard';
 
-function Catalogo({ busqueda, carrito, estado, productos, onBuscar, onCambiarBusqueda, onRecargar, onAgregarCarrito }) {
+function Catalogo({ busqueda, carrito, estado, productos, rutasOfertas, onBuscar, onCambiarBusqueda, onRecargar, onAgregarCarrito }) {
   return (
     <section id="productos" className="container my-5" aria-labelledby="titulo-productos">
       <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-4">
@@ -31,6 +31,7 @@ function Catalogo({ busqueda, carrito, estado, productos, onBuscar, onCambiarBus
               key={producto.id}
               producto={producto}
               estaEnCarrito={carrito.some((item) => item.id === producto.id)}
+              rutaOferta={rutasOfertas[producto.titulo]}
               onAgregarCarrito={onAgregarCarrito}
             />
           ))

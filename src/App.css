@@ -3,8 +3,13 @@
 }
 
 .catalogo-img,
-.destacados-img {
+.destacados-img,
+.oferta-img {
   height: 220px;
+}
+
+.oferta-img {
+  background-color: #f8f9fa;
 }
 
 .producto-card {

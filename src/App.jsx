@@ -9,6 +9,8 @@ import Carrito from './components/Carrito';
 import Categorias from './components/Categorias';
 import Destacados from './components/Destacados';
 import Footer from './components/Footer';
+import OfertaDetalle from './components/OfertaDetalle';
+import { paginasOfertas, rutasOfertasPorTitulo } from './data/siteData';
 import { calcularCantidadCarrito, calcularTotalCarrito } from './utils/price';
 import { filtrarProductos } from './utils/products';
 import { publicPath } from './utils/paths';
@@ -24,6 +26,7 @@ function obtenerCarritoGuardado() {
 }
 
 function App() {
+  const [rutaActual, setRutaActual] = useState(window.location.hash);
   const [mensajeHero, setMensajeHero] = useState('Somos tu tienda de videojuegos, consolas y accesorios. Encuentra tus juegos favoritos y disfruta de nuevas aventuras.');
   const [alertaHero, setAlertaHero] = useState('');
   const [productos, setProductos] = useState([]);
@@ -36,6 +39,16 @@ function App() {
   // Carga el catalogo externo al iniciar la aplicacion.
   useEffect(() => {
     cargarProductos();
+  }, []);
+
+  useEffect(() => {
+    function actualizarRuta() {
+      setRutaActual(window.location.hash);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('hashchange', actualizarRuta);
+    return () => window.removeEventListener('hashchange', actualizarRuta);
   }, []);
 
   // Sincroniza el carrito con localStorage para usarlo tambien en checkout.html.
@@ -54,6 +67,9 @@ function App() {
 
   const totalCarrito = calcularCantidadCarrito(carrito);
   const precioTotalCarrito = calcularTotalCarrito(carrito);
+  const slugOfertaActual = rutaActual.replace(/^#\/ofertas\//, '');
+  const ofertaActual = paginasOfertas.find((oferta) => oferta.slug === slugOfertaActual);
+  const estaEnPaginaOferta = rutaActual.startsWith('#/ofertas/');
 
   // Actualiza contenido visual del hero mediante estado de React.
   function cambiarMensajeHero() {
@@ -131,33 +147,40 @@ function App() {
   return (
     <div className="bg-light min-vh-100">
       <Navbar totalCarrito={totalCarrito} />
-      <Hero mensaje={mensajeHero} alerta={alertaHero} onCambiarMensaje={cambiarMensajeHero} />
+      {estaEnPaginaOferta ? (
+        <OfertaDetalle oferta={ofertaActual} />
+      ) : (
+        <>
+          <Hero mensaje={mensajeHero} alerta={alertaHero} onCambiarMensaje={cambiarMensajeHero} />
 
-      <main>
-        <Carousel />
-        <Presentacion />
-        <Catalogo
-          busqueda={busqueda}
-          carrito={carrito}
-          estado={estadoProductos}
-          productos={productosFiltrados}
-          onBuscar={buscarProductos}
-          onCambiarBusqueda={setBusqueda}
-          onRecargar={cargarProductos}
-          onAgregarCarrito={agregarAlCarrito}
-        />
-        <Carrito
-          productos={carrito}
-          totalProductos={totalCarrito}
-          totalPrecio={precioTotalCarrito}
-          onEliminarProducto={eliminarDelCarrito}
-        />
-        <Categorias />
-        <Destacados
-          tarjetaActiva={tarjetaActiva}
-          onActivarTarjeta={setTarjetaActiva}
-        />
-      </main>
+          <main>
+            <Carousel />
+            <Presentacion />
+            <Catalogo
+              busqueda={busqueda}
+              carrito={carrito}
+              estado={estadoProductos}
+              productos={productosFiltrados}
+              rutasOfertas={rutasOfertasPorTitulo}
+              onBuscar={buscarProductos}
+              onCambiarBusqueda={setBusqueda}
+              onRecargar={cargarProductos}
+              onAgregarCarrito={agregarAlCarrito}
+            />
+            <Carrito
+              productos={carrito}
+              totalProductos={totalCarrito}
+              totalPrecio={precioTotalCarrito}
+              onEliminarProducto={eliminarDelCarrito}
+            />
+            <Categorias />
+            <Destacados
+              tarjetaActiva={tarjetaActiva}
+              onActivarTarjeta={setTarjetaActiva}
+            />
+          </main>
+        </>
+      )}
 
       <Footer mensajeFormulario={mensajeFormulario} onEnviarContacto={enviarContacto} />
     </div>
